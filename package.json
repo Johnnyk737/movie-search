@@ -6,11 +6,12 @@
   "scripts": {
     "start": "node ./dist/server",
     "build": "webpack --mode development",
-    "dev": "webpack --mode development && node ./dist/server"
+    "dev": "webpack --mode development && concurrently \"webpack --mode development --watch\"  \"nodemon ./dist/server\""
   },
   "author": "John Kroll",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^4.1.0",
     "express": "^4.16.4",
     "mongoose": "^5.4.22",
     "react": "^16.8.6",
