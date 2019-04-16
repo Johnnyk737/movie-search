@@ -6,6 +6,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h1 {
-    font-size: 5em;
+    font-size: 2em;
   }
 `;

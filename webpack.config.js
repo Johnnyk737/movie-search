@@ -3,14 +3,21 @@ const nodeExternals = require('webpack-node-externals');
 const path = require('path');
 
 module.exports = {
-  entry: './src/server.js',
+  // Entry point where it starts the process
+  // Does not work when set to express server, does work when set to client
+  // Currently unsure exactly why
+  entry: {
+    index: './src/client/index.js', //"./src/server.js", 
+  },
+  // Defines the output path after webpack does its stuff
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'server.js',
+    filename: 'bundle.js',
     publicPath: '/'
   },
-  target: 'node',
-  externals: nodeExternals(),
+  // Not entirely sure what these are for.
+  // target: 'node',
+  // externals: [nodeExternals()],
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
@@ -25,9 +32,6 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          // options: {
-          //   presets: ['react', 'es2015']
-          // }
         }
       },
       {

@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node ./dist/server",
+    "start": "nodemon ./src/server.js",
     "build": "webpack --mode development",
-    "dev": "webpack --mode development && concurrently \"webpack --mode development --watch\"  \"nodemon ./dist/server\""
+    "dev": "concurrently \"webpack --mode development --watch\"  \"nodemon ./src/server.js\""
   },
   "author": "John Kroll",
   "license": "ISC",
