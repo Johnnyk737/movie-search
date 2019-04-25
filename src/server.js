@@ -1,4 +1,7 @@
-const express = require('express');
+import express from 'express'
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+import App from './client/App'
 
 
 const port = 2500;
@@ -9,16 +12,12 @@ server.get('/', (req, res) => {
   /*
   * renderToString() will take our React app and turn it into a string
   * to be inserted into our Html template function.
-  * 
-  * TODO
-  * Not quite done here.  It's rendering the app properly, replacing the body as expected.
-  * However, I'm not sure if it's properly rendering on the server side first.
-  * Still some work to do here
   */
  
  // const sheet = new ServerStyleSheet();
-//  const body = renderToString(App);
- const body = "Hello John"; //works
+ // This works when server is set to entry in webpack, but I no longer get console outputs.
+ const body = renderToString(<App />);
+//  const body = "Hello John"; //works
  var title = 'Movie Search';
   // const styles = sheet.getStyleTags(); // <-- getting all the tags from the sheet
 

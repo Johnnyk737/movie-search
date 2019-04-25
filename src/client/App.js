@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css'
+// import './App.css'
 import { GlobalStyle } from './styles/GlobalStyles'
 import Search from './Search'
 
