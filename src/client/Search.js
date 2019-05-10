@@ -8,7 +8,8 @@ class Search extends Component {
     super(props)
 
     this.state = {
-      searchTerm: ""
+      searchTerm: "",
+      searchType: 's',
     }
 
     this.doSearch = this.doSearch.bind(this);
@@ -19,16 +20,16 @@ class Search extends Component {
     e.preventDefault();
     let searchTerm = this.state.searchTerm !== "" ? this.state.searchTerm : "iron"
     console.log(searchTerm);
-    Axios.get("http://www.omdbapi.com/?s="+searchTerm+"&y=2019&apikey="+config.omdb_api)
+    Axios.get(`http://www.omdbapi.com/?${this.state.searchType}=${searchTerm}&apikey=${config.omdb_api}`)
       .then(response => {
-        console.log(response)
+        console.log(response.data)
       })
   }
 
   handleChange = (event) =>  {
     // console.log(event.target.value);
     this.setState({
-      searchTerm: event.target.value
+      [event.target.name]: event.target.value
     })
 
     console.log(this.state.searchTerm);
@@ -38,10 +39,14 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <form className="test" onSubmit={this.doSearch}>
-          <input type="text" onChange={this.handleChange}>
+        <form className="search-form" onSubmit={this.doSearch}>
+          <select className="search-select" name="searchType" value={this.state.searchType} onChange={this.handleChange}>
+            <option value="s">Search All</option>
+            <option value="t">Title</option>
+          </select>
+          <input className="search-input" type="text" name="searchTerm" onChange={this.handleChange}>
           </input>
-          <input type="submit"></input>
+          <input className="search-submit" type="submit"></input>
         </form>
       </div>
     )

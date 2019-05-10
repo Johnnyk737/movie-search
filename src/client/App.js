@@ -2,11 +2,12 @@ import React from 'react';
 // import './App.css'
 import { GlobalStyle } from './styles/GlobalStyles'
 import Search from './Search'
+import TopBar from './TopBar'
 
-const App = () => 
+const App = () =>
   <div className="test">
     <GlobalStyle />
-    <h1>Movie Search</h1>
+    <TopBar />
     <Search />
   </div>
 
