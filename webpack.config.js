@@ -24,7 +24,7 @@ var client = {
       __isBrowser__: "true"
     })
   ],
-  devtool: 'source-map', 
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -37,7 +37,7 @@ var client = {
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        use: [ 'style-loader', 'css-loader' ]
+        use: [ 'style-loader','css-loader' ]
       }
     ]
   }
@@ -63,7 +63,7 @@ var server = {
       __isBrowser__: "false"
     })
   ],
-  devtool: 'source-map', 
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -76,7 +76,7 @@ var server = {
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        use: [ 'style-loader', 'css-loader' ]
+        use: [ 'css-loader' ]
       }
     ]
   }

@@ -1,4 +1,5 @@
-import React, { Component }from 'react'
+import React, { Component } from 'react'
+import './styles/topbar.css'
 
 class TopBar extends Component {
 
@@ -8,12 +9,11 @@ class TopBar extends Component {
 
   render() {
     return (
-      <div>
+      <div className="top-bar">
         Movie Search
       </div>
     )
   }
-
 }
 
 export default TopBar

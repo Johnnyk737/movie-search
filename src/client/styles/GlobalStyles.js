@@ -9,6 +9,8 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 2em;
   }
 
+
+
   .search-form {
     display: block;
   }
