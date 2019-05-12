@@ -1,9 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM, { Route, BrowserRoute as Router, Switch} from 'react-dom';
 import App from './App';
 
-/* For this to work properly, .babelrc needs to transpile react first, then env
-*/
+// const routes = (
+//   <Router>
+//     <Route path='/' component={App}></Route>
+
+//     {/* Catch all for routing errors */}
+//     <Route path='*' ></Route>
+//   </Router>
+// )
+
 
 const app = document.getElementById( "app" );
 ReactDOM.hydrate( <App />, app );

@@ -8,7 +8,7 @@ const App = () =>
   <div className="test">
     {/* <GlobalStyle /> */}
     <TopBar />
-    <Search />
+    {/* <Search /> */}
   </div>
 
 export default App;

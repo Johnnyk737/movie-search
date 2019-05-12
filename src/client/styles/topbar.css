@@ -1,5 +1,40 @@
 .top-bar {
+  font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
   height: 10vh;
-  background-color: lightyellow;
+  background-color: lightblue;
+  display: block;
   /* border: 1px solid black; */
+  box-shadow: 10px -10px 10px 10px rgba(0,0,0,0.75);
+}
+
+.container {
+  display: flex;
+}
+
+.vert-align {
+  align-items: center;
+  display: flex;
+  height: 9vh;
+}
+
+.top-bar-title {
+  font-size: 2em;
+  cursor: pointer;
+}
+
+.top-bar-links {
+  /* display: inline; */
+  height: 5vh;
+}
+
+.top-bar-links li {
+  display: inline;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.center {
+  width: 50%;
+  margin: auto;
+  text-align: center;
 }
