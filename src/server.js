@@ -1,6 +1,9 @@
 import express from 'express'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import counter from './client/reducers'
 import App from './client/App'
 
 
@@ -8,30 +11,31 @@ const port = 2500;
 const server = express();
 
 server.use(express.static('dist'))
-server.get('/', (req, res) => {
-  /*
-  * renderToString() will take our React app and turn it into a string
-  * to be inserted into our Html template function.
-  */
+server.use((req, res) => {
 
- // const sheet = new ServerStyleSheet();
- // This works when server is set to entry in webpack, but I no longer get console outputs.
- const body = renderToString(<App />);
-//  const body = "Hello John"; //works
- var title = 'Movie Search';
-  // const styles = sheet.getStyleTags(); // <-- getting all the tags from the sheet
+  let store = createStore(counter)
+
+  const body = renderToString(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+  var title = 'Movie Search';
+
+  let preloadedState = store.getState();
 
   res.send(
     renderHtml(
       body,
-      title
+      title,
+      preloadedState
     )
   );
 });
 
 /* Function call to render initial HTML
 */
-const renderHtml = (body, title) => `
+const renderHtml = (body, title, preloadedState) => `
   <!DOCTYPE html>
   <html>
     <head>
@@ -40,6 +44,9 @@ const renderHtml = (body, title) => `
     </head>
     <body style="margin:0">
       <div id="app">${body}</div>
+      <script>
+        window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+      </script>
       <script src="./bundle.js"></script>
     </body>
   </html>
@@ -47,3 +54,5 @@ const renderHtml = (body, title) => `
 
 server.listen(port);
 console.log(`Serving at http://localhost:${port}`);
+
+// https://redux.js.org/recipes/server-rendering
