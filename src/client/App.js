@@ -5,10 +5,10 @@ import Search from './Search'
 import TopBar from './TopBar'
 
 const App = () =>
-  <div className="test">
+  <div>
     {/* <GlobalStyle /> */}
     <TopBar />
-    {/* <Search /> */}
+    <Search />
   </div>
 
 export default App;
