@@ -12,6 +12,7 @@ class Search extends Component {
       searchTerm: "",
       searchType: 's',
       results: [],
+      response: false,
     }
 
     this.doSearch = this.doSearch.bind(this);
@@ -28,9 +29,10 @@ class Search extends Component {
         return response.data
       })
       .then(data => {
-        console.log(data.Search);
+        console.log(data);
         this.setState({
-          results: data.Search
+          results: data.Search,
+          response: true
         })
       })
   }
@@ -48,21 +50,28 @@ class Search extends Component {
 
   }
 
+  // length = (arr) => {
+  //   if (arr.length == 0 || arr.length == undefined || arr == []) {
+  //     return 0
+  //   }
+
+  //   return arr.length;
+  // }
 
   render() {
     return (
-      <div className="container search">
+      <div className="container-fluid search">
         <form className="search-form" onSubmit={this.doSearch}>
           <select className="search-select" name="searchType" value={this.state.searchType} onChange={this.handleChange}>
             <option value="s">Search All</option>
             <option value="t">Title</option>
           </select>
-          <input className="search-input" type="text" name="searchTerm" onChange={this.handleChange}>
+          <input className="search-input form-control" type="text" name="searchTerm" onChange={this.handleChange}>
           </input>
-          <input className="search-submit" type="submit"></input>
+          <input className="search-submit btn btn-primary" type="submit"></input>
         </form>
         <ul>
-          {this.state.results.map((movie) => (
+          {this.state.results && this.state.results.map((movie) => (
             <li>
               <img src={movie.Poster} height="200" width="135" />
               <div>

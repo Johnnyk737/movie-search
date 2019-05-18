@@ -36,8 +36,12 @@ var client = {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
-        use: [ 'style-loader','css-loader' ]
+        // exclude: /node_modules/,
+        loader: [ 'style-loader','css-loader' ]
+      },
+      {
+        test: /\.(svg|ttf|woff|woff2|eot)$/,
+        loader: 'url?limit=5000'
       }
     ]
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM, { Route, BrowserRoute as Router, Switch} from 'react-dom';
 import App from './App';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // const routes = (
 //   <Router>
