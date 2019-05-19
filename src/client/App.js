@@ -5,10 +5,10 @@ import Search from './Search'
 import TopBar from './TopBar'
 
 const App = () =>
-  <div className="test">
+  <React.Fragment>
     {/* <GlobalStyle /> */}
     <TopBar />
     {/* <Search /> */}
-  </div>
+  </React.Fragment>
 
 export default App;
