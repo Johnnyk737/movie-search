@@ -15,7 +15,7 @@ class Search extends Component {
     }
 
     this.doSearch = this.doSearch.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
   }
 
   doSearch(e) {
@@ -28,7 +28,7 @@ class Search extends Component {
       })
   }
 
-  handleChange = (event) =>  {
+  handleTypeChange = (event) =>  {
     // console.log(event.target.value);
     // this.setState({
     //   [event.target.name]: event.target.value
@@ -38,16 +38,24 @@ class Search extends Component {
     // console.log('state ', this.props.getState());
   }
 
+  handleSearchStringChange = (event) => {
+    this.props.dispatch({
+      type: 'SET_SEARCH_STRING',
+      data: {
+        searchString: event.target.value
+      }
+    })
+  }
 
   render() {
     return (
       <div>
         <form className="search-form" onSubmit={this.doSearch}>
-          <select className="search-select" name="searchType" value={this.props.searchType} onChange={this.handleChange}>
+          <select className="search-select" name="searchType" value={this.props.searchType} onChange={this.handleTypeChange}>
             <option value="s">Search All</option>
             <option value="t">Title</option>
           </select>
-          <input className="search-input" type="text" name="searchTerm" onChange={this.handleChange}>
+          <input className="search-input" type="text" name="searchTerm" onChange={this.handleSearchStringChange}>
           </input>
           <input className="search-submit" type="submit"></input>
         </form>
@@ -60,7 +68,8 @@ class Search extends Component {
 
 export default connect((state, props) => {
   return {
-    searchType: state.searchType
+    searchType: state.searchType,
+    searchString: state.searchString
   }
 
 })(Search);
