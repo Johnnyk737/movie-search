@@ -4,7 +4,8 @@ import { renderToString } from 'react-dom/server'
 import { StaticRouter as Router } from 'react-router-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import counter from './client/reducers'
+import counter from './client/store/reducers'
+import store from './client/store/createStore'
 // import App from './client/App'
 import { renderRoutes } from 'react-router-config';
 
@@ -21,11 +22,11 @@ server.use((req, res) => {
   let context = {}
 
   const body = renderToString(
-    // <Provider store={store}>
+    <Provider store={store}>
       <Router context={context} location={req.path} query={req.query}>
         <div>{renderRoutes(routes)}</div>
       </Router>
-    // </Provider>
+    </Provider>
   );
   var title = 'Movie Search';
 

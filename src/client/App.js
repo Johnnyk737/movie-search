@@ -8,7 +8,7 @@ const App = () =>
   <React.Fragment>
     {/* <GlobalStyle /> */}
     <TopBar />
-    {/* <Search /> */}
+    <Search />
   </React.Fragment>
 
 export default App;

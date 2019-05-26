@@ -18,9 +18,9 @@ var client = {
   // externals: [nodeExternals()],
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: `'development'`
-      },
+      // 'process.env': {
+      //   NODE_ENV: `'development'`
+      // },
       __isBrowser__: "true"
     })
   ],
@@ -60,9 +60,9 @@ var server = {
   externals: [nodeExternals()],
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: `'development'`
-      },
+      // 'process.env': {
+      //   NODE_ENV: `'development'`
+      // },
       __isBrowser__: "false"
     })
   ],
