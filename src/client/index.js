@@ -2,13 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import counter from './store/reducers'
-import App from './App';
+// import counter from '../store/reducers'
+// import App from './App';
 import { renderRoutes } from 'react-router-config'
 
 import routes from './routes'
-import store from './store/createStore'
-
+import store from '../store/createStore'
 
 // // Grab the state from a global variable injected into the server-generated HTML
 // const preloadedState = window.__PRELOADED_STATE__

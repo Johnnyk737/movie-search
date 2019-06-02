@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Axios from 'axios';
 import config from '../../config/keys.json'
+import { fetchMovies, setSearchType, setSearchString } from '../store/actions/actions'
+// import store from '../store/createStore.js';
 
 //Convert to stateless
 class Search extends Component {
@@ -10,7 +12,7 @@ class Search extends Component {
     super(props)
 
     this.state = {
-      searchTerm: "",
+      searchString: "",
       searchType: 's',
     }
 
@@ -20,30 +22,33 @@ class Search extends Component {
 
   doSearch(e) {
     e.preventDefault();
-    let searchTerm = this.state.searchTerm !== "" ? this.state.searchTerm : "iron"
-    console.log(searchTerm);
-    Axios.get(`http://www.omdbapi.com/?${this.state.searchType}=${searchTerm}&apikey=${config.omdb_api}`)
-      .then(response => {
-        console.log(response.data)
-      })
+
+    let { searchType, searchString } = this.state
+
+    //Need to move this to an action
+    // console.log(`http://www.omdbapi.com/?${this.state.searchType}=${this.state.searchString}&apikey=${config.omdb_api}`)
+    // Axios.get(`http://www.omdbapi.com/?${this.state.searchType}=${this.state.searchString}&apikey=${config.omdb_api}`)
+    //   .then(response => {
+    //     console.log(response.data)
+    //   })
+    console.log("Fetching movies")
+    this.props.dispatch(fetchMovies(searchType, searchString))
   }
 
   handleTypeChange = (event) =>  {
-    // console.log(event.target.value);
-    // this.setState({
-    //   [event.target.name]: event.target.value
-    // })
-    this.props.dispatch({type:'SET_SEARCH_TYPE', data: {searchType: event.target.value}})
+    this.props.dispatch(setSearchType(event.target.value))
 
-    // console.log('state ', this.props.getState());
+    this.setState({
+      searchType: this.props.searchType ? this.props.searchType : event.target.value
+    })
+    console.log(this.state)
   }
 
   handleSearchStringChange = (event) => {
-    this.props.dispatch({
-      type: 'SET_SEARCH_STRING',
-      data: {
-        searchString: event.target.value
-      }
+    this.props.dispatch(setSearchString(event.target.value))
+
+    this.setState({
+      searchString: this.props.searchString ? this.props.searchString : event.target.value
     })
   }
 
