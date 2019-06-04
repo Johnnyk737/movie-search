@@ -1,91 +1,91 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import Axios from 'axios';
 import config from '../../config/keys.json'
-import "./styles/search.css"
+import * as SearchActions from '../store/actions/actions'
+// import store from '../store/createStore.js';
 
+//Convert to stateless
 class Search extends Component {
 
   constructor(props) {
     super(props)
-
-    this.state = {
-      searchTerm: "",
-      searchType: 's',
-      results: [],
-      response: false,
-    }
-
-    this.doSearch = this.doSearch.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  doSearch(e) {
+  doSearch = (e) => {
     e.preventDefault();
-    let searchTerm = this.state.searchTerm !== "" ? this.state.searchTerm : "iron"
-    console.log(searchTerm);
-    Axios.get(`http://www.omdbapi.com/?${this.state.searchType}=${searchTerm}&apikey=${config.omdb_api}`)
-      .then(response => {
-        // console.log(response.data)
-        return response.data
-      })
-      .then(data => {
-        console.log(data);
-        this.setState({
-          results: data.Search,
-          response: true
-        })
-      })
+
+    const { searchType, searchString } = this.props
+
+    console.log("Fetching movies")
+    this.props.SearchActions.fetchMovies(searchType, searchString)
   }
 
-  handleChange = (event) =>  {
-    // console.log(event.target.value);
+  handleTypeChange = (event) =>  {
+    this.props.SearchActions.setSearchType(event.target.value)
+
     this.setState({
-      [event.target.name]: event.target.value
+      searchType: this.props.searchType ? this.props.searchType : event.target.value
     })
-
-    console.log(this.state.searchTerm);
+    console.log(this.state)
   }
 
-  populateResults = () => {
+  handleSearchStringChange = (event) => {
+    this.props.SearchActions.setSearchString(event.target.value)
 
+    this.setState({
+      searchString: this.props.searchString ? this.props.searchString : event.target.value
+    })
   }
-
-  // length = (arr) => {
-  //   if (arr.length == 0 || arr.length == undefined || arr == []) {
-  //     return 0
-  //   }
-
-  //   return arr.length;
-  // }
 
   render() {
     return (
       <div className="container-fluid search">
         <form className="search-form" onSubmit={this.doSearch}>
-          <select className="search-select" name="searchType" value={this.state.searchType} onChange={this.handleChange}>
+          <select className="search-select" name="searchType" value={this.props.searchType} onChange={this.handleTypeChange}>
             <option value="s">Search All</option>
             <option value="t">Title</option>
           </select>
-          <input className="search-input form-control" type="text" name="searchTerm" onChange={this.handleChange}>
+          <input className="search-input" type="text" name="searchTerm" onChange={this.handleSearchStringChange}>
           </input>
           <input className="search-submit btn btn-primary" type="submit"></input>
         </form>
-        <ul>
-          {this.state.results && this.state.results.map((movie) => (
-            <li>
-              <img src={movie.Poster} height="200" width="135" />
-              <div>
-                {movie.Title}
-              </div>
-            </li>
+        {this.props.totalResults != undefined &&
+          this.props.movies.map((movie, index) => (
+            <ul key={index}>
+              <li>
+                <h3>{movie.Title}</h3>
+              </li>
+            </ul>
           ))}
-        </ul>
       </div>
     )
   }
 }
 
-export default Search;
+//add mapper here
+
+function mapStateToProps(state, props) {
+  console.log("state: ", state)
+  console.log("props:", props)
+  const { searchType, searchString, movies, totalResults } = state.search
+
+  return {
+    searchType: searchType,
+    searchString: searchString,
+    movies: movies,
+    totalResults: totalResults
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    SearchActions: bindActionCreators(SearchActions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
 
 // movie api
 // http://www.omdbapi.com/

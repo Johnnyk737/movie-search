@@ -14,13 +14,17 @@ class TopBar extends Component {
         <div className="container center vert-align">
           {/* <Router> */}
             <div className="top-bar-title">
-              {/* <Link to="/"> */}
+              <Link to="/">
                 Movie Search
-              {/* </Link> */}
+              </Link>
             </div>
             <nav className="top-bar-links">
               <ul>
-                <li>Search Movies</li>
+                <li>
+                  <Link to='/search'>
+                  Search Movies
+                  </Link>
+                </li>
                 <li>My Movie List</li>
               </ul>
             </nav>
