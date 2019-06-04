@@ -7,9 +7,9 @@ import { searchTypes } from '../actions/actions'
 const defaultState = {
   searchType: 's',
   searchString: '',
-  movies: [],
-  totalResults: 0,
-  recievedDt: ''
+  // movies: [],
+  // totalResults: 0,
+  // recievedDt: ''
 }
 
 function searchType(state = defaultState, action) {

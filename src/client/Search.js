@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Axios from 'axios';
 import config from '../../config/keys.json'
-import { fetchMovies, setSearchType, setSearchString } from '../store/actions/actions'
+import * as SearchActions from '../store/actions/actions'
 // import store from '../store/createStore.js';
 
 //Convert to stateless
@@ -10,33 +11,19 @@ class Search extends Component {
 
   constructor(props) {
     super(props)
-
-    this.state = {
-      searchString: "",
-      searchType: 's',
-    }
-
-    this.doSearch = this.doSearch.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
   }
 
-  doSearch(e) {
+  doSearch = (e) => {
     e.preventDefault();
 
-    let { searchType, searchString } = this.state
+    const { searchType, searchString } = this.props
 
-    //Need to move this to an action
-    // console.log(`http://www.omdbapi.com/?${this.state.searchType}=${this.state.searchString}&apikey=${config.omdb_api}`)
-    // Axios.get(`http://www.omdbapi.com/?${this.state.searchType}=${this.state.searchString}&apikey=${config.omdb_api}`)
-    //   .then(response => {
-    //     console.log(response.data)
-    //   })
     console.log("Fetching movies")
-    this.props.dispatch(fetchMovies(searchType, searchString))
+    this.props.SearchActions.fetchMovies(searchType, searchString)
   }
 
   handleTypeChange = (event) =>  {
-    this.props.dispatch(setSearchType(event.target.value))
+    this.props.SearchActions.setSearchType(event.target.value)
 
     this.setState({
       searchType: this.props.searchType ? this.props.searchType : event.target.value
@@ -45,7 +32,7 @@ class Search extends Component {
   }
 
   handleSearchStringChange = (event) => {
-    this.props.dispatch(setSearchString(event.target.value))
+    this.props.SearchActions.setSearchString(event.target.value)
 
     this.setState({
       searchString: this.props.searchString ? this.props.searchString : event.target.value
@@ -64,6 +51,14 @@ class Search extends Component {
           </input>
           <input className="search-submit" type="submit"></input>
         </form>
+        {this.props.totalResults != undefined &&
+          this.props.movies.map((movie, index) => (
+            <ul key={index}>
+              <li>
+                <h3>{movie.Title}</h3>
+              </li>
+            </ul>
+          ))}
       </div>
     )
   }
@@ -71,13 +66,26 @@ class Search extends Component {
 
 //add mapper here
 
-export default connect((state, props) => {
-  return {
-    searchType: state.searchType,
-    searchString: state.searchString
-  }
+function mapStateToProps(state, props) {
+  console.log("state: ", state)
+  console.log("props:", props)
+  const { searchType, searchString, movies, totalResults } = state.search
 
-})(Search);
+  return {
+    searchType: searchType,
+    searchString: searchString,
+    movies: movies,
+    totalResults: totalResults
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    SearchActions: bindActionCreators(SearchActions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
 
 // movie api
 // http://www.omdbapi.com/
