@@ -1,14 +1,13 @@
 import React from 'react';
+// import { withRouter } from 'react-router'
 import './styles/App.css'
-// import { GlobalStyle } from './styles/GlobalStyles'
 import Search from './Search'
 import TopBar from './TopBar'
 
 const App = () =>
-  <div className="test">
-    {/* <GlobalStyle /> */}
+  <React.Fragment>
     <TopBar />
-    {/* <Search /> */}
-  </div>
+    <Search />
+  </React.Fragment>
 
 export default App;

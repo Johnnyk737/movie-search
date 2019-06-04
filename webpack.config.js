@@ -18,12 +18,15 @@ var client = {
   // externals: [nodeExternals()],
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: `'production'`
-      },
+      // 'process.env': {
+      //   NODE_ENV: `'development'`
+      // },
       __isBrowser__: "true"
     })
   ],
+  optimization: {
+    minimize: true
+  },
   devtool: 'source-map',
   module: {
     rules: [
@@ -57,9 +60,9 @@ var server = {
   externals: [nodeExternals()],
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: `'production'`
-      },
+      // 'process.env': {
+      //   NODE_ENV: `'development'`
+      // },
       __isBrowser__: "false"
     })
   ],
