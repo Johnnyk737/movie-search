@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import Axios from 'axios';
 import config from '../../config/keys.json'
 import * as SearchActions from '../store/actions/actions'
+import Movies from './Movies'
+import './styles/search.css'
 // import store from '../store/createStore.js';
 
 //Convert to stateless
@@ -40,25 +42,26 @@ class Search extends Component {
   }
 
   render() {
+    const { searchType, totalResults, movies } = this.props
+
     return (
-      <div className="container-fluid search">
+      <div className="search">
         <form className="search-form" onSubmit={this.doSearch}>
-          <select className="search-select" name="searchType" value={this.props.searchType} onChange={this.handleTypeChange}>
+          <select className="search-select" name="searchType" value={searchType} onChange={this.handleTypeChange}>
             <option value="s">Search All</option>
             <option value="t">Title</option>
           </select>
           <input className="search-input" type="text" name="searchTerm" onChange={this.handleSearchStringChange}>
           </input>
-          <input className="search-submit btn btn-primary" type="submit"></input>
+          <input className="search-submit" type="submit"></input>
         </form>
-        {this.props.totalResults != undefined &&
-          this.props.movies.map((movie, index) => (
-            <ul key={index}>
-              <li>
-                <h3>{movie.Title}</h3>
-              </li>
-            </ul>
-          ))}
+        {totalResults!= undefined && <p>Total Results: {totalResults}</p>}
+        {totalResults != undefined &&
+          <Movies
+            totalResults={totalResults}
+            movies={movies}
+          />}
+        {}
       </div>
     )
   }
@@ -67,8 +70,8 @@ class Search extends Component {
 //add mapper here
 
 function mapStateToProps(state, props) {
-  console.log("state: ", state)
-  console.log("props:", props)
+  // console.log("state: ", state)
+  // console.log("props:", props)
   const { searchType, searchString, movies, totalResults } = state.search
 
   return {
