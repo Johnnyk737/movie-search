@@ -47,13 +47,19 @@ class Search extends Component {
     return (
       <div className="search">
         <form className="search-form" onSubmit={this.doSearch}>
-          <select className="search-select" name="searchType" value={searchType} onChange={this.handleTypeChange}>
+          <select className="search-select"
+                  name="searchType"
+                  value={searchType}
+                  onChange={this.handleTypeChange}>
             <option value="s">Search All</option>
             <option value="t">Title</option>
           </select>
-          <input className="search-input" type="text" name="searchTerm" onChange={this.handleSearchStringChange}>
+          <input className="search-input"
+                 type="text"
+                 name="searchTerm"
+                 onChange={this.handleSearchStringChange}
+                 onKeyDown={(event)=>{event.keyCode === '13' ? this.doSearch : false}}>
           </input>
-          <input className="search-submit" type="submit"></input>
         </form>
         {totalResults!= undefined && <p>Total Results: {totalResults}</p>}
         {totalResults != undefined &&
