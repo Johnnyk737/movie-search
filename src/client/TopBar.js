@@ -13,21 +13,23 @@ class TopBar extends Component {
       <div className="top-bar">
         <div className="container center vert-align">
           {/* <Router> */}
-            <div className="top-bar-title">
-              <Link to="/">
-                Movie Search
-              </Link>
+            <div className="top-bar-items">
+              <div className="top-bar-title">
+                <Link to="/">
+                  Movie Search
+                </Link>
+              </div>
+              <nav className="top-bar-links">
+                <ul>
+                  <li>
+                    <Link to='/search'>
+                    Search Movies
+                    </Link>
+                  </li>
+                  <li>My Movie List</li>
+                </ul>
+              </nav>
             </div>
-            <nav className="top-bar-links">
-              <ul>
-                <li>
-                  <Link to='/search'>
-                  Search Movies
-                  </Link>
-                </li>
-                <li>My Movie List</li>
-              </ul>
-            </nav>
           {/* </Router> */}
         </div>
       </div>
