@@ -11,7 +11,7 @@ class TopBar extends Component {
   render() {
     return (
       <div className="top-bar">
-        <div className="container center vert-align">
+        <div className="container vert-align left-justify">
           {/* <Router> */}
             <div className="top-bar-items">
               <div className="top-bar-title">
