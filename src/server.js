@@ -8,11 +8,12 @@ import { Provider } from 'react-redux'
 import store from './store/createStore'
 // import App from './client/App'
 import { renderRoutes } from 'react-router-config';
+import TopBar from './client/TopBar'
 
 import routes from './client/routes';
 
-
-const port = 2500;
+//because 2500 was too hard to type all the time...
+const port = 3000;
 const server = express();
 
 server.use(express.static('dist'))
@@ -25,6 +26,7 @@ server.use((req, res) => {
   const body = renderToString(
     <Provider store={store}>
       <Router context={context} location={req.url} query={req.query}>
+        <TopBar />
         <div>{renderRoutes(routes)}</div>
       </Router>
     </Provider>

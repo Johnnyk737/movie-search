@@ -26,7 +26,11 @@ class TopBar extends Component {
                     Search Movies
                     </Link>
                   </li>
-                  <li>My Movie List</li>
+                  <li>
+                    <Link to='/mylist'>
+                      My Movie List
+                    </Link>
+                  </li>
                 </ul>
               </nav>
             </div>

@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 // import counter from '../store/reducers'
 // import App from './App';
 import { renderRoutes } from 'react-router-config'
+import TopBar from './TopBar'
 
 import routes from './routes'
 import store from '../store/createStore'
@@ -18,11 +19,12 @@ import store from '../store/createStore'
 // // Create Redux store with initial state
 // const store = createStore({})
 
-// Can't use React.Fragment here because https://github.com/facebook/react/issues/10591 (I think...)
+// Can't use React.Fragment here because https://github.com/facebook/react/issues/11759 (I think...)
 const app = document.getElementById( "app" );
 ReactDOM.hydrate(
   <Provider store={store}>
     <Router>
+      <TopBar />
       <div>
         {renderRoutes(routes)}
       </div>

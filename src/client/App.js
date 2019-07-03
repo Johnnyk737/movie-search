@@ -6,7 +6,7 @@ import TopBar from './TopBar'
 
 const App = () =>
   <React.Fragment>
-    <TopBar />
+    {/* <TopBar /> */}
     <Search />
   </React.Fragment>
 

@@ -1,5 +1,6 @@
 import Search from './Search'
 import App from './App'
+import SavedMovies from './SavedMovies'
 
 const routes = [
   {
@@ -10,6 +11,11 @@ const routes = [
   {
     component: Search,
     path: '/search',
+    exact: true
+  },
+  {
+    component: SavedMovies,
+    path: '/mylist',
     exact: true
   }
 ]
